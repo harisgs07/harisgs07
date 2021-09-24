@@ -45,7 +45,7 @@ public class Instructor {
         Scanner sc = new Scanner(System.in);
         
         String [] s = new String[10];
-        s[0]="java"; // can insert many subject using for loop
+        s[0]="java"; // can insert many subject using for loop for each obj
 
         Instructor obj1 = new Instructor("hari",4.5,3, s); // -----Can Have many Objects for different users-----
 
