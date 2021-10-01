@@ -5,9 +5,7 @@ import java.util.Hashtable;
 import java.math.*;
 import java.util.RandomAccess;
 import java.util.Scanner;
-
 import javax.lang.model.util.ElementScanner14;
-
 import java.util.Random;
 
 public class Employee {
@@ -19,7 +17,6 @@ public class Employee {
     String dateofjoin;
     int employeeid;
     boolean gender;
-    int flag;
     static int nextemployeenumber;
     int nextemployeenumbernonstat;
 
@@ -29,7 +26,7 @@ public class Employee {
         // in java no static constructor or variable.
         // static constructor or variable is that they cant be inherited by child class
 
-        System.out.println("please enter the Employee id");
+        System.out.println("please enter the starting Employee id");
         Scanner sc  = new Scanner(System.in);
         nextemployeenumber = sc.nextInt() ;
 
@@ -40,7 +37,7 @@ public class Employee {
 
         this.employeeid = nextemployeenumber + 1;
         nextemployeenumber = this.employeeid;
-        System.out.println(this.employeeid);
+        System.out.println("Employee id is:- "+ this.employeeid);
     }
 
     Employee(String employeename, String dateofjoin, boolean gender ){
@@ -62,23 +59,39 @@ public class Employee {
     }
     
     public int addDependants(String dependantname){
-    
-        for (int i = 0; i < this.dependant.length; i++){
-            if(this.dependant[i] == dependantname)
-                {this.flag += 1;}
-        }
-
-        if(flag == 0){
-            for (int i = 0; i < this.dependant.length; i++){    
-                if(this.dependant[i] == ""){
-                    this.dependant[i] = dependantname;
-                    return 1;
-                }
-            }
-        }
-        else
+        // System.out.println("iahsd");
+        // int flag=0;
+        // for (int i = 0; i < this.dependant.length; i++){
+        //     if(this.dependant[i] == dependantname){
+        //     // {System.out.println("iahsd");
+        //         return 0;
+        //         // flag += 1;
+        //     }
+        // }
+        // if(flag == 0){
+        //     for (int i = 0; i < this.dependant.length; i++){    
+        //         if(this.dependant[i] == ""){
+        //             System.out.println("iahsd");
+        //             this.dependant[i] = dependantname;
+        //             return 1;
+        //         }
+        //     }
+        // }
+        // else
+        //     return 0;
+        // System.out.println(flag);
+        // return flag;
+        
+        if(this.dependant.length == 3)
             return 0;
-        return flag;        
+        else{
+            for (int i = 0; i < this.dependant.length; i++){
+                if(this.dependant[i] == dependantname)
+                    return 0;
+            }
+            this.dependant[this.dependant.length] = dependantname;
+            return this.dependant.length;
+        }
     }
 
     public boolean updateDependants(String dependantname, int dependantid){
@@ -117,16 +130,24 @@ public class Employee {
 
     public static void main(String[] args) {
     staticEmployee();
+
     Scanner sc = new Scanner(System.in);
+
+    System.out.println("please enter the Employee Detaills");
     Employee obj = new Employee(sc.next(),sc.next(),sc.nextBoolean(),sc.nextShort());
-    int check = 0;
-    int returnvalue = 0;
+    // int check = 0;
+    // int returnvalue = 0;
+    // System.out.println("please enter the Dependants name on each line");
+    // while(check < obj.numberofdependant){
+    //     returnvalue += obj.addDependants(sc.next());
+    //     check += 1;
+    // }
     
-    while(check < obj.numberofdependant){
-        returnvalue += obj.addDependants(sc.next());
-        check += 1;
-    }
+    System.out.println("Total dependant "+ obj.addDependants(sc.next()));
+    System.out.println("please enter the values for updating dependants\nvalues are new_name on first line and\nposition on second line");
     System.out.println(obj.updateDependants(sc.next(), sc.nextInt()));
-    Employee obj1 = new Employee(sc.next(),sc.next(),sc.nextBoolean(),sc.nextShort());
+
+    // Employee obj1 = new Employee(sc.next(),sc.next(),sc.nextBoolean(),sc.nextShort());
+    // this to continue the obj calls
     }
 }
